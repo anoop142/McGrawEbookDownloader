@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# Copyright Anoop S
-# McGraw hill express library ebook downloader
+# McGraw hill express library ebook downloader.
+# Copyright (c) 2020 Anoop S. Licensed under the MIT license (see LICENSE.txt).
 import requests
 import argparse
 import subprocess
