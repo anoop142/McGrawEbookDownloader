@@ -8,6 +8,13 @@ import os
 from sys import argv
 import re
 import pypdftk
+# colors
+GREEN = '\033[32m'
+YELLOW = '\033[33m'
+BWHITE = '\033[1;37m'
+WHITE = '\033[m' 
+PURPLE = '\033[35m'
+CYAN = '\033[36m'
 # deafult download location
 output_dir = os.path.expanduser('~') + '/'
 # constants
@@ -20,14 +27,14 @@ header = {
 def downloader(dl_book_name, url_book_xod):
     ebook_xod = output_dir + dl_book_name + ".xod"
     ebook_pdf = output_dir + dl_book_name + ".pdf"
-    print(output_dir + dl_book_name)
-    print('Downloading..', end='\r')
+    print(output_dir + BWHITE + dl_book_name+ WHITE)
+    print(CYAN+'Downloading..'+WHITE,end='\r')
     # check for file
     if os.path.isfile(ebook_pdf):
-        print("Already downloaded!")
+        print(GREEN+"Already downloaded!"+WHITE)
         quit()
     elif os.path.isfile(ebook_xod) and not os.path.isfile(ebook_xod + ".aria2") and os.path.getsize(ebook_xod) != 0:
-        print("xod file found!")
+        print(PURPLE+"xod file found!"+WHITE)
         return
     else:
         # download file
@@ -35,7 +42,7 @@ def downloader(dl_book_name, url_book_xod):
             with open(ebook_xod, "wb") as f:
                 req = requests.get(url_book_xod, headers=header)
                 f.write(req.content)
-            print("Download complete!")
+            print(GREEN+"Download complete!"+WHITE)
         else:
             os.chdir(output_dir)
             subprocess.call(['aria2c', '-x16', url_book_xod,
@@ -43,7 +50,7 @@ def downloader(dl_book_name, url_book_xod):
 
 
 def xod_to_pdf(dl_book_name):
-    print('Converting XOD to PDF...')
+    print(YELLOW+'Converting XOD to PDF...'+WHITE)
     subprocess.call([docpub,
                      '–f',
                      'pdf',
@@ -55,12 +62,12 @@ def xod_to_pdf(dl_book_name):
 
 
 def pdf_uncompress(pdf_wm_file, pdf_clean_file):
-    print('Decompressing..')
+    print(YELLOW+'Decompressing..'+WHITE)
     pypdftk.uncompress(pdf_wm_file, pdf_clean_file)
 
 
 def pdf_compress(pdf_wm_file, pdf_clean_file):
-    print('Compressing...')
+    print(YELLOW+'Compressing...'+WHITE)
     pypdftk.compress(pdf_clean_file, pdf_wm_file)
 
 
@@ -77,7 +84,7 @@ def strip_watermark(dl_book_name):
     # clean up
     os.remove(pdf_clean_file)
     os.remove(output_dir + dl_book_name + ".xod")
-    print('Finished!')
+    print(GREEN+'Finished!',WHITE)
 
 
 def main(url_book, username, password):
