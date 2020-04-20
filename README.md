@@ -25,7 +25,7 @@ To use this utility, you need to have account on McGraw-Hill Express library and
  
 run this script as follows:
 ```
-python3 downloader.py -u USERNAME -p PASSWORD 
+python3 downloader.py -u USERNAME -p PASSWORD https://www.expresslibrary.mheducation.com/pdfreader/EXAMPLE
 ```
 
 ```
