@@ -1,6 +1,6 @@
 # McGrawDownloader
 ## This script downloads E-Books from McGraw-Hill Education in  PDF format.
-Express library uses XOD format for their Ebooks. To convert it into PDF we uses a proprietary software called "docpub" . The "bin" dir includes docpub for linux.
+Express library uses XOD format for their Ebooks. To convert it into PDF we uses a proprietary software called "docpub" . The  script will download docpub for linux and save it in dir "docpub".
 
 Note:  Please don't use this for piracy.
 I wrote this because there is no other way to view books offline in linux .
