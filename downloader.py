@@ -8,7 +8,6 @@ import os
 import platform
 from sys import argv
 import re
-import pypdftk
 # colors
 GREEN = '\033[32m'
 YELLOW = '\033[33m'
@@ -69,12 +68,12 @@ def xod_to_pdf(dl_book_name):
 
 def pdf_uncompress(pdf_wm_file, pdf_clean_file):
     print(YELLOW+'Decompressing..'+WHITE)
-    pypdftk.uncompress(pdf_wm_file, pdf_clean_file)
+    subprocess.call(['pdftk',pdf_wm_file, 'output', pdf_clean_file, "uncompress"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 
 
 def pdf_compress(pdf_wm_file, pdf_clean_file):
     print(YELLOW+'Compressing...'+WHITE)
-    pypdftk.compress(pdf_clean_file, pdf_wm_file)
+    subprocess.call(['pdftk',pdf_clean_file, 'output',  pdf_wm_file, "compress"],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
 
 
 def strip_watermark(dl_book_name):
