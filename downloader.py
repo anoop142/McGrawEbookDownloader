@@ -116,7 +116,7 @@ def main(url_book, username, password):
 
 # CLI
 parser = argparse.ArgumentParser(
-    description='ebook-dl by Anoop. A script to download ebooks as pdf from express library')
+    description='McGrawEbookDownloader by Anoop. A script to download ebooks as pdf from express library')
 parser.add_argument(
     'url',
     help='ebook url',
