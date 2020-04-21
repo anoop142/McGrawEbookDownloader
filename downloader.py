@@ -8,6 +8,7 @@ import os
 import platform
 from sys import argv
 import re
+import tarfile
 # colors
 GREEN = '\033[32m'
 YELLOW = '\033[33m'
@@ -18,12 +19,12 @@ CYAN = '\033[36m'
 # deafult download location
 output_dir = os.path.expanduser('~') + '/'
 # constants
-docpub_path = os.path.dirname(os.path.abspath(argv[0]))+'/bin/'
+script_path = os.path.dirname(os.path.abspath(argv[0]))+'/'
 if platform.architecture()[0] == "32bit":
-    docpub = docpub_path+'docpub32'
+    docpub_elf = 'docpub32'
 elif platform.architecture()[0] == "64bit":
-    docpub = docpub_path+'docpub'
-    
+    docpub_elf = 'docpub' 
+docpub_url = 'https://www.pdftron.com/downloads/docpub.tar.gz'
 url_login = 'https://www.expresslibrary.mheducation.com/login'
 header = {
     'user-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.62 Safari/537.36'}
@@ -54,9 +55,22 @@ def downloader(dl_book_name, url_book_xod):
                              '-o', dl_book_name + ".xod"])
 
 
+def setup_docpub():
+    if not os.path.isfile(script_path+'docpub/'+docpub_elf):
+        print(PURPLE+'docupub not found!',WHITE)
+        print(CYAN+'Downloading docpub...',WHITE)
+        with open(script_path+"docpub.tar.gz", "wb") as f:
+            req = requests.get(docpub_url, headers=header)
+            f.write(req.content)
+        print(GREEN+'Downloaded docpub.tar.gz',WHITE)
+        f = tarfile.open(script_path+"docpub.tar.gz")
+        f.extract("docpub/"+docpub_elf,path=script_path)
+        # clean
+        os.remove(script_path+"docpub.tar.gz")
+
 def xod_to_pdf(dl_book_name):
     print(YELLOW+'Converting XOD to PDF...'+WHITE)
-    subprocess.call([docpub,
+    subprocess.call([script_path+'docpub/'+docpub_elf,
                      '–f',
                      'pdf',
                      '-o',
@@ -95,6 +109,7 @@ def strip_watermark(dl_book_name):
 
 
 def main(url_book, username, password):
+    setup_docpub()
     login_params = {
         'loginuser': username,
         'loginpwd': password,
