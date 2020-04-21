@@ -5,6 +5,7 @@ import requests
 import argparse
 import subprocess
 import os
+import platform
 from sys import argv
 import re
 import pypdftk
@@ -18,7 +19,12 @@ CYAN = '\033[36m'
 # deafult download location
 output_dir = os.path.expanduser('~') + '/'
 # constants
-docpub = os.path.dirname(os.path.abspath(argv[0])) + '/bin/docpub'
+docpub_path = os.path.dirname(os.path.abspath(argv[0]))+'/bin/'
+if platform.architecture()[0] == "32bit":
+    docpub = docpub_path+'docpub32'
+elif platform.architecture()[0] == "64bit":
+    docpub = docpub_path+'docpub'
+    
 url_login = 'https://www.expresslibrary.mheducation.com/login'
 header = {
     'user-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.62 Safari/537.36'}
