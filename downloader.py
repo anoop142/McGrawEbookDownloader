@@ -75,10 +75,12 @@ def strip_watermark(dl_book_name):
     pdf_wm_file = output_dir + dl_book_name + ".pdf"
     pdf_clean_file = output_dir + dl_book_name + "_clean.pdf"
     pdf_uncompress(pdf_wm_file, pdf_clean_file)
-    with open(output_dir + dl_book_name + "_clean.pdf", "rb") as f:
+    # create clean file
+    with open(pdf_clean_file, "rb") as f:
         data = f.read()
         data = data.replace(b'www.pdftron.com', b'')
-    with open(output_dir + dl_book_name + "_clean.pdf", "wb") as out_file:
+    # overwrite clean file without watermark
+    with open(pdf_clean_file, "wb") as out_file:
         out_file.write(data)
     pdf_compress(pdf_wm_file, pdf_clean_file)
     # clean up
