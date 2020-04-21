@@ -6,6 +6,7 @@ Note:  Please don't use this for piracy.
 I wrote this because there is no other way to view books offline in linux .
 
 ## Requirements/Installation
+**pdftk** should be installed system wide.
 
 Linux:
 
