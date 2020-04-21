@@ -19,6 +19,8 @@ CYAN = '\033[36m'
 # deafult download location
 output_dir = os.path.expanduser('~') + '/'
 # constants
+# Set this to false if pdftk isn't available.
+REMOVE_WATERMARK = True
 script_path = os.path.dirname(os.path.abspath(argv[0]))+'/'
 if platform.architecture()[0] == "32bit":
     docpub_elf = 'docpub32'
@@ -131,7 +133,8 @@ def main(url_book, username, password):
     dl_book_name = re.sub("[^a-zA-Z0-9]+", "_", dl_book_name)
     downloader(dl_book_name, url_book_xod)
     xod_to_pdf(dl_book_name)
-    strip_watermark(dl_book_name)
+    if REMOVE_WATERMARK:
+        strip_watermark(dl_book_name)
 
 
 # CLI
