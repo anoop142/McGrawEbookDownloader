@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# McGraw hill express library ebook downloader.
+# McGraw hill express library ebook downloader. 
 # Copyright (c) 2020 Anoop S. Licensed under the MIT license (see LICENSE.txt).
 import requests
 import argparse
@@ -147,9 +147,6 @@ parser.add_argument(
 args = parser.parse_args()
 # make output dir proper
 if args.output_dir:
-    if args.output_dir.endswith(""):
-        output_dir = args.output_dir + "/"
-    else:
-        output_dir = args.output_dir
+    output_dir = os.path.abspath(args.output_dir)+'/'
 # main
 main(args.url, args.username, args.password)
