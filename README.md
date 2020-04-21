@@ -2,7 +2,7 @@
 ## This script downloads E-Books from McGraw-Hill Education in  PDF format.
 Express library uses XOD format for their Ebooks. To convert it into PDF we uses a proprietary software called "docpub" . The "bin" dir includes docpub for linux.
 
-Note:  Please don'tuse this for piracy.
+Note:  Please don't use this for piracy.
 I wrote this because there is no other way to view books offline in linux .
 
 ## Requirements/Installation
@@ -16,6 +16,7 @@ Windows:
 
 You are on your own. you need docpub for windows
 which can be downloaded from https://www.pdftron.com/documentation/cli/download/windows/
+
 You may also need to modify the script.
 
 
