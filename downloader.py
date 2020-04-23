@@ -118,7 +118,7 @@ def main(url_book, username, password):
         'task': 'login',
         'login': 'Login'}
     with requests.Session() as s:
-        req = s.post(url_login, headers=header, params=login_params)
+        s.post(url_login, headers=header, params=login_params)
         req = s.get(url_book, headers=header)
         regex = r'bookUrl:\s*?"(.+)"'
         matches = re.findall(regex, req.text)
