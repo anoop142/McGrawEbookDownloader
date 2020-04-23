@@ -41,14 +41,14 @@ def downloader(dl_book_name, url_book_xod):
     if os.path.isfile(ebook_pdf):
         print(GREEN+"Already downloaded!"+WHITE)
         quit()
-    elif os.path.isfile(ebook_xod) and not os.path.isfile(ebook_xod + ".aria2") and os.path.getsize(ebook_xod) != 0:
+    elif os.path.isfile(ebook_xod) and not os.path.isfile(ebook_xod + ".aria2"):
         print(PURPLE+"xod file found!"+WHITE)
         return
     else:
         # download file
         if not args.aria:
+            req = requests.get(url_book_xod, headers=header)
             with open(ebook_xod, "wb") as f:
-                req = requests.get(url_book_xod, headers=header)
                 f.write(req.content)
             print(GREEN+"Download complete!"+WHITE)
         else:
